@@ -29,6 +29,8 @@ Just to clarify, I'm merely expressing curiosity about this choice, and not bein
 # Stress testing
 I've implemented a basic Gatling simulation to test the performance of my machine under different levels of simultaneous requests. My machine consistently handled up to 500 simultaneous connections (within a second) without any issues. However, when I exceeded that threshold, I noticed that Gatling started to receive some percentage of premature closures which were not due to timeouts. I haven't seen any warnings or errors neither on server side nor DB/RabbitMQ, so it might have been due to incorrect Gatling configuration (another tool I haven't used for a while).
 
+It can be found here: https://github.com/NeverwinterMoon/tuum-test-assignment-stress
+
 If you decide to try out my specific Gatling implementation, please note that it requires a pre-existing account ID created elsewhere. To run the simulation, use the command `./gradlew gatlingRun`.
 
 # Horizontal scaling
