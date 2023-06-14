@@ -57,9 +57,8 @@ public class AccountController {
 		@AccountIDIsValid(message = "It looks like the account with the provided ID is missing.")
 		@PathVariable Integer accountID
 	) {
-		System.out.println("Here " + accountID);
 		List<Transaction> transactionList = transactionService.list(accountID);
-		System.out.println("transactionList " + transactionList);
+
 		return new ResponseEntity<>(
 			transactionList,
 			HttpStatus.OK
