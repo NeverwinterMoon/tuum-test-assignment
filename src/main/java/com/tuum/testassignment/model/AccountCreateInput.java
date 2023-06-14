@@ -4,7 +4,8 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import com.tuum.testassignment.validation.CountryIsValid;
@@ -13,7 +14,10 @@ import com.tuum.testassignment.validation.CurrencyListIsValid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
-@Data
+//@Data // Might be overkill as it generates the equivalent of @Getter, @Setter, @EqualsAndHashCode, and @ToString
+@Getter
+// Needed just for spec, for example: assertThat(rabbitMQMessageList).containsExactlyInAnyOrderElementsOf(List.of(input));
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

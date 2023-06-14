@@ -1,6 +1,7 @@
 package com.tuum.testassignment.api;
 
 import java.util.AbstractMap;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -85,6 +86,7 @@ public class RESTExceptionHandler {
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public ResponseEntity<Object> handleValidationErrors(HttpMessageNotReadableException exception) {
 		if (exception.getCause() instanceof JsonMappingException) {
+			// For example, com.tuum.testassignment.model.TransactionCreateInput["direction"]
 			if (((JsonMappingException) exception.getCause()).getPathReference().contains("direction")) {
 				return new ResponseEntity<>(
 					new AbstractMap.SimpleEntry<>(
@@ -104,15 +106,17 @@ public class RESTExceptionHandler {
 		);
 	}
 
-	// For validation on @RequestParam
+	// For validation on @RequestParam and @PathVariable
 	@ExceptionHandler(ConstraintViolationException.class)
 	public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException exception) {
 		Map<String, String> errorMap = exception.getConstraintViolations().stream()
 			.map(violation -> {
-				String fieldName = violation.getPropertyPath().toString().replaceFirst("^list\\.", "");
+				String propertyPath = violation.getPropertyPath().toString();
+				String fieldName = propertyPath.substring(propertyPath.lastIndexOf(".") + 1);
+
 				String errorMessage = violation.getMessage();
 
-				return new AbstractMap.SimpleEntry<>(fieldName, errorMessage);
+				return new SimpleEntry<>(fieldName, errorMessage);
 			})
 			.collect(Collectors.toMap(
 				Map.Entry::getKey,

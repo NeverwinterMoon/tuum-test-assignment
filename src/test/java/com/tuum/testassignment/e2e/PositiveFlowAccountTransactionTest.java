@@ -341,7 +341,7 @@ class PositiveFlowAccountTransactionTest {
 	void whenListingTransactionsForAccount() {
 		/* When */
 		ResponseEntity<List<Transaction>> response = testRestTemplate.exchange(
-			"/api/transaction/list?accountID={accountID}",
+			"/api/account/{accountID}/transaction",
 			HttpMethod.GET,
 			null,
 			new ParameterizedTypeReference<>() {
@@ -395,7 +395,7 @@ class PositiveFlowAccountTransactionTest {
 	void whenFetchingAccount() {
 		/* When */
 		ResponseEntity<Account> response = testRestTemplate.getForEntity(
-			"/api/account?accountID={accountID}",
+			"/api/account/{accountID}",
 			Account.class,
 			Map.of("accountID", accountID)
 		);

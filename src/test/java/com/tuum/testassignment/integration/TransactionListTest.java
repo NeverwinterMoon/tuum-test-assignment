@@ -15,7 +15,7 @@ class TransactionListTest extends TransactionBaseTest {
 	void whenAccountIsMissing() {
 		/* When */
 		ResponseEntity<Map<String, ?>> response = testRestTemplate.exchange(
-			"/api/transaction/list?accountID={accountID}",
+			"/api/account/{accountID}/transaction",
 			HttpMethod.GET,
 			null,
 			new ParameterizedTypeReference<>() {

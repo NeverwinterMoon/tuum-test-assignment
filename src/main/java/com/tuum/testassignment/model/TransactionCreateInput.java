@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import org.hibernate.validator.constraints.Length;
@@ -22,7 +23,8 @@ import jakarta.validation.constraints.Positive;
  * Validations that involve checks against PostgreSQL here should be safe to perform outside the transaction, as the data checked here is not subject to change (account, supported currencies, currencies of account balances - these are created once in scope of this application initialization and never added/removed/modified)
  */
 @Builder
-@Data
+@Getter
+@EqualsAndHashCode // Used for testing only
 @AllArgsConstructor
 // Required for Jackson deserialization, otherwise fails, as Jackson looks for default (no arguments) constructor
 @NoArgsConstructor

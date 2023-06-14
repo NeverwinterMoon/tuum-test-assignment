@@ -24,7 +24,7 @@ class AccountFetchTest {
 	void whenAccountNotFound() {
 		/* When */
 		ResponseEntity<Map<String, ?>> response = testRestTemplate.exchange(
-			"/api/account?accountID={accountID}",
+			"/api/account/{accountID}",
 			HttpMethod.GET,
 			null,
 			new ParameterizedTypeReference<>() {

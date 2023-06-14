@@ -34,6 +34,12 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-docker-compose")
 }
 
+// This would allow reflection API to get parameter names in situations like
+// @PathVariable ConstraintViolationException handling
+tasks.withType<JavaCompile> {
+  options.compilerArgs.add("-parameters")
+}
+
 tasks.withType<Test> {
   useJUnitPlatform()
   finalizedBy(tasks.jacocoTestReport)
